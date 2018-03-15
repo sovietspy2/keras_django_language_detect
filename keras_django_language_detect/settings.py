@@ -129,4 +129,4 @@ CACHES = {
     }
 }
 
-STATIC_PATH = '/opt/'
+STATIC_PATH = '/root/'
