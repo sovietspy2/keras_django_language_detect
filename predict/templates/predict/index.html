@@ -1,0 +1,62 @@
+<html>
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {background-color: lightslategray;}
+        h1   {color: blue;}
+        p    {color: darkslateblue;}
+        .ccc {max-width: 500px}
+    </style>
+</head>
+
+<body>
+
+
+<form method="POST" action="/get_predict" class="from">
+{% csrf_token %}
+<input type="text" name="text">
+{% bootstrap_button "Predict" button_type="submit" button_class="btn-primary" %}
+</form>
+
+{% if prediction %}
+<table class="table table-dark ccc">
+  <thead>
+    <tr>
+      <th scope="col">Text</th>
+      <th scope="col">Model predicted value</th>
+      <th scope="col">Google validated value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ prediction.text }}</td>
+      <td>{{ prediction.model_d }}</td>
+      <td>{{ prediction.google_d }}</td>
+    </tr>
+  </tbody>
+</table>
+{% endif %}
+
+{% if predictions_list %}
+    <ul>
+    {% for p in predictions_list %}
+        <li><a href="/{{ p.id }}/">{{ p.text }}</a> predicted: {{ p.model_predicted }} , google translate {{ p.google_prediction }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No data.</p>
+{% endif %}
+
+</body>
+
+</html>
