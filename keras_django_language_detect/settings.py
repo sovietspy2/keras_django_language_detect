@@ -25,7 +25,7 @@ SECRET_KEY = 'ybjnmj=)as9^i8*8c_%6u5#$jg5#5^!dt4r0bn%axib+1x3x&+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://wortex.stream']
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
