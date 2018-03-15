@@ -129,7 +129,4 @@ CACHES = {
     }
 }
 
-STATIC_PATH = {
-    'MODEL': '/opt/',
-    'FILES': '/opt/',
-}
+STATIC_PATH = '/opt/'
