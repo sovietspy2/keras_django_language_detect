@@ -128,3 +128,8 @@ CACHES = {
         'LOCATION': 'localhost:11211',
     }
 }
+
+STATIC_PATH = {
+    'MODEL': '/opt/',
+    'FILES': '/opt/',
+}
