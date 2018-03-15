@@ -5,12 +5,18 @@ from predict import datas
 from keras.backend import clear_session
 import pickle
 from keras.models import load_model
+from django.core.cache import cache
 
 def load_obj(name):
     with open('/home/sovietspy2/nn_data/' + name + '.pkl', 'rb') as f:
         return pickle.load(f)
 
 def load_stuff():
+    model = cache.get('cached_model')
+    if model is None:
+        model = load_model("/home/sovietspy2/nn_data/model2.h5")
+        cache.set('cached_model', model, 6000)
+
     model = load_model("/home/sovietspy2/nn_data/model2.h5")
     max_sentence_length = 200
     vocab_to_int = load_obj('vocab_to_int')
@@ -39,9 +45,12 @@ def predict_sentence(sentence):
     :param sentence: The text to predict
     :return: string - The language of the sentence
     """
+
     clear_session()
 
     model, max_sentence_length, vocab_to_int, int_to_languages = load_stuff()
+
+
 
     # Clean the sentence
     sentence = process_sentence(sentence)
