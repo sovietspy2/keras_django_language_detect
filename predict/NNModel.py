@@ -6,18 +6,19 @@ from keras.backend import clear_session
 import pickle
 from keras.models import load_model
 from django.core.cache import cache
+from django.conf import settings
 
 def load_obj(name):
-    with open('/home/sovietspy2/nn_data/' + name + '.pkl', 'rb') as f:
+    with open(settings.STATIC_PATH + name + '.pkl', 'rb') as f:
         return pickle.load(f)
 
 def load_stuff():
     model = cache.get('cached_model')
     if model is None:
-        model = load_model("/home/sovietspy2/nn_data/model2.h5")
+        model = load_model(settings.STATIC_PATH+"model2.h5")
         cache.set('cached_model', model, 6000)
 
-    model = load_model("/home/sovietspy2/nn_data/model2.h5")
+    model = load_model(settings.STATIC_PATH+"model2.h5")
     max_sentence_length = 200
     vocab_to_int = load_obj('vocab_to_int')
     int_to_languages = load_obj('int_to_languages')
