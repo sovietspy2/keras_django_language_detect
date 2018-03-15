@@ -25,7 +25,7 @@ SECRET_KEY = 'ybjnmj=)as9^i8*8c_%6u5#$jg5#5^!dt4r0bn%axib+1x3x&+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http://wortex.stream']
 
 
 # Application definition
@@ -121,3 +121,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'localhost:11211',
+    }
+}
